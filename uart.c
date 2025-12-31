@@ -1,5 +1,21 @@
 #include "uart.h"
 
+void uart_init(void)
+{
+    /* 禁用 UART */
+    UART_CR = 0x0;
+
+    /* 波特率：QEMU 下其实无所谓，但写上是规范 */
+    UART_IBRD = 1;
+    UART_FBRD = 40;
+
+    /* 8N1 + FIFO */
+    UART_LCRH = (3 << 5);
+
+    /* 启用 UART, TX, RX */
+    UART_CR = (1 << 0) | (1 << 8) | (1 << 9);
+}
+
 void uart_put_hex(uint64_t x)
 {
     uart_puts("0x");
