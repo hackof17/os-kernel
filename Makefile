@@ -5,7 +5,7 @@ LD    = $(CROSS)-ld
 CFLAGS = -ffreestanding -fno-pic -fno-stack-protector \
          -nostdlib -O2 -Wall
 
-OBJS = boot.o kernel.o uart.o vector.o
+OBJS = boot.o kernel.o uart.o vector.o gic.o
 
 all: myos.elf
 
@@ -21,6 +21,8 @@ kernel.o: kernel.c
 uart.o: uart.c
 	$(CC) $(CFLAGS) -c $< -o $@
 vector.o: vector.S
+	$(CC) $(CFLAGS) -c $< -o $@
+gic.o: gic.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

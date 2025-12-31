@@ -9,14 +9,14 @@ SECTIONS {
         *(.text.boot)
     }
 
-    /* 普通内核代码 */
-    .text : {
-        *(.text*)
-    }
-
     /* 异常向量表：必须对齐 + 不被丢弃 */
     .vectors ALIGN(2048) : {
         KEEP(*(.vectors))
+    }
+
+    /* 普通内核代码 */
+    .text : {
+        *(.text*)
     }
 
     .rodata : {
